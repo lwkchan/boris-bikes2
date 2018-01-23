@@ -9,9 +9,16 @@ describe DockingStation do # syntax for testing class instance - accepts class n
   it { is_expected.to respond_to :release_bike}
   it 'releases working bikes' do
     bike = subject.release_bike
-    expect(bike).to be_working
+    expect(bike).to be_working 
+    # to check working returns false, use not_to eg. 
+    # expect(bike).not_to be_working 
+  end
 end
-end
+
+
+
+# be_XXX where XXX is name of method, responds to method call. eg. be_crying responds to crying? (true or false)
+# the test will pass if the method returns true
 
 # subject in line 11 is basically self. So we call method release_bike on class DockingStation.
 # this method - when called - returns new instance of class Bike.
