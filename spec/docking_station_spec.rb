@@ -6,5 +6,5 @@ require 'docking_station'
 # class needs to exist, or any string you'd like.
 
 describe DockingStation do # syntax for testing class instance - accepts class name
-
+  it { is_expected.to respond_to :release_bike}
 end
