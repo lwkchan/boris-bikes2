@@ -13,6 +13,7 @@ describe DockingStation do # syntax for testing class instance - accepts class n
     # to check working returns false, use not_to eg. 
     # expect(bike).not_to be_working 
   end
+  it { is_expected.to respond_to(:dock).with(1).argument}
 end
 
 
