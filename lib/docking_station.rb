@@ -18,7 +18,7 @@ class DockingStation
   end
 
   def release_bike
-    return Bike.new
+    Bike.new
   end
 
   def dock(bike)
