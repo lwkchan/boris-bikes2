@@ -6,10 +6,15 @@ require 'docking_station'
 # class needs to exist, or any string you'd like.
 
 describe DockingStation do # syntax for testing class instance - accepts class name
+  bike = Bike.new
   it { is_expected.to respond_to :release_bike}
   it 'releases working bikes' do
+    p "Test 1"
+    # bike = Bike.new
+    subject.dock(bike)
     bike = subject.release_bike
     expect(bike).to be_working 
+    p "End of test 1"
     # to check working returns false, use not_to eg. 
     # expect(bike).not_to be_working 
   end
@@ -19,7 +24,7 @@ describe DockingStation do # syntax for testing class instance - accepts class n
   # it {expect { DockingStation.bike }.to raise_error("should have 0 bikes")}
   describe '#release_bike' do 
     it 'releases a bike' do 
-      bike = Bike.new
+      # bike = Bike.new
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end

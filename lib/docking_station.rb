@@ -18,14 +18,20 @@ class DockingStation
   # end
 
   def release_bike
+    p "release"
+    p @bike
     @bike
   end
 
   def dock(bike)
+    p @bike, bike
     @bike = bike
+    p @bike, bike
+
   end
 
 end
+
 
 
 
