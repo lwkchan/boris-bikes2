@@ -12,17 +12,17 @@ class DockingStation
   # @age = value
   #end
 
-  def show
-    puts @bike #(.working?)
-    puts @quantity
-  end
+  # def show
+  #   puts @bike #(.working?)
+  #   puts @quantity
+  # end
 
   def release_bike
-    Bike.new
+    @bike
   end
 
   def dock(bike)
-
+    @bike = bike
   end
 
 end

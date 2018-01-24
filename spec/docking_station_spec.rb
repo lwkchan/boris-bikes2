@@ -13,12 +13,17 @@ describe DockingStation do # syntax for testing class instance - accepts class n
     # to check working returns false, use not_to eg. 
     # expect(bike).not_to be_working 
   end
-<<<<<<< HEAD
-  it { is_expected.to respond_to(:dock).with(1).argument}
-=======
+
   it {is_expected.to respond_to(:dock).with(1).argument}
   it {is_expected.to respond_to(:bike)}
->>>>>>> 1e959ecdede5129c1b73d62466b548a3f733b129
+  # it {expect { DockingStation.bike }.to raise_error("should have 0 bikes")}
+  describe '#release_bike' do 
+    it 'releases a bike' do 
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.release_bike).to eq bike
+    end
+  end
 end
 
 
