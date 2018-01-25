@@ -24,6 +24,11 @@ describe DockingStation do # syntax for testing class instance - accepts class n
     it 'can dock 20 bikes' do
       20.times { subject.dock Bike.new }
     end
+
+    it "raises an error when the docking station is full" do
+      20.times { subject.dock(bike) }
+      expect { subject.dock(bike) }.to raise_error "Docking station full"
+    end
   end
 
   describe '#release_bike' do
