@@ -9,20 +9,12 @@ bike = Bike.new
 
 describe DockingStation do # syntax for testing class instance - accepts class name
   it { is_expected.to respond_to :release_bike}
-  it 'releases working bikes' do
-    subject.dock(bike)
-    bike = subject.release_bike
-    expect(bike).to be_working
-    # to check working returns false, use not_to eg.
-    # expect(bike).not_to be_working
-  end
-
   it {is_expected.to respond_to(:dock).with(1).argument}
   it {is_expected.to respond_to(:bikes)}
 
   describe '#dock' do
     it 'can dock 20 bikes' do
-      20.times { subject.dock Bike.new }
+      20.times { subject.dock(bike) }
     end
 
     it "raises an error when the docking station is full" do
@@ -32,10 +24,20 @@ describe DockingStation do # syntax for testing class instance - accepts class n
   end
 
   describe '#release_bike' do
+
     it 'releases a bike' do
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
+
+    it 'releases working bikes' do
+      subject.dock(bike)
+      bike = subject.release_bike
+      expect(bike).to be_working
+      # to check working returns false, use not_to eg.
+      # expect(bike).not_to be_working
+    end
+
     it 'raises an error when there are no bikes available' do
       expect { subject.release_bike }.to raise_error 'No bikes available'
     end
