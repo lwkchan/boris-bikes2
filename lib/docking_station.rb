@@ -10,24 +10,15 @@ class DockingStation
 
   attr_reader :bikes, :broken_bikes
 
-  #same as
-  # def bikes=(value)
-  # @age = value
-  #end
-
-  # def show
-  #   puts @bikes #(.working?)
-  #   puts @quantity
-  # end
-
   def release_bike
-    fail 'No bikes available' if empty?
+    fail 'No bikes available' if empty? && @broken_bikes.empty?
+    fail 'No working bikes available' if empty? && !@broken_bikes.empty?
     @bikes.pop
   end
 
-  def dock(bike, working= true)
+  def dock(bike)
     fail 'Docking station full' if full?
-    working ? @bikes.push(bike) : @broken_bikes.push(bike)
+    bike.broken? ? @broken_bikes << bike : @bikes << bike
   end
 
 private

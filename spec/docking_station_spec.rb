@@ -9,7 +9,7 @@ bike = Bike.new
 
 describe DockingStation do # syntax for testing class instance - accepts class name
   it { is_expected.to respond_to :release_bike}
-  it {is_expected.to respond_to(:dock).with(2).argument}
+  it {is_expected.to respond_to(:dock).with(1).argument}
   it {is_expected.to respond_to(:bikes)}
   it {is_expected.to respond_to(:broken_bikes)}
 
@@ -41,12 +41,6 @@ describe DockingStation do # syntax for testing class instance - accepts class n
       expect { subject.dock(bike) }.to raise_error "Docking station full"
     end
 
-    context "when bike is broken" do
-      it "should add bike to broken bike array" do
-        expect { subject.dock(bike, false)}.to change{broken_bikes.count}.by(1)
-      end
-    end
-
   end
 
   describe '#release_bike' do
@@ -56,12 +50,11 @@ describe DockingStation do # syntax for testing class instance - accepts class n
       expect(subject.release_bike).to eq bike
     end
 
-    it 'releases working bikes' do
-      subject.dock(bike)
-      bike = subject.release_bike
-      expect(bike).to be_working
-      # to check working returns false, use not_to eg.
-      # expect(bike).not_to be_working
+    it 'only releases working bikes' do
+      broken_bike = Bike.new
+      broken_bike.report_broken
+      subject.dock(broken_bike)
+      expect{subject.release_bike}.to raise_error 'No working bikes available'
     end
 
     it 'raises an error when there are no bikes available' do
