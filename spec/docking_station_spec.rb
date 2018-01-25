@@ -12,13 +12,31 @@ describe DockingStation do # syntax for testing class instance - accepts class n
   it {is_expected.to respond_to(:dock).with(1).argument}
   it {is_expected.to respond_to(:bikes)}
 
-  describe '#dock' do
-    it 'can dock 20 bikes' do
-      20.times { subject.dock(bike) }
+  describe '#initialize' do
+    context "with parameters" do
+      let(:dockingstation) {DockingStation.new(10)}
+
+      it "should create a docking station with a capacity of 10" do
+        10.times { dockingstation.dock(bike) }
+        expect { dockingstation.dock(bike) }.to raise_error "Docking station full"
+      end
     end
 
+    context "without parameters" do
+      let(:dockingstation) {DockingStation.new}
+
+      it "should create a docking station with a default capacity of 20" do
+        DockingStation::DEFAULT_CAPACITY.times { dockingstation.dock(bike) }
+        expect { dockingstation.dock(bike) }.to raise_error "Docking station full"
+      end
+
+    end
+  end
+
+  describe '#dock' do
+
     it "raises an error when the docking station is full" do
-      20.times { subject.dock(bike) }
+      DockingStation::DEFAULT_CAPACITY.times { subject.dock(bike) }
       expect { subject.dock(bike) }.to raise_error "Docking station full"
     end
   end
