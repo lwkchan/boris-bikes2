@@ -9,8 +9,9 @@ bike = Bike.new
 
 describe DockingStation do # syntax for testing class instance - accepts class name
   it { is_expected.to respond_to :release_bike}
-  it {is_expected.to respond_to(:dock).with(1).argument}
+  it {is_expected.to respond_to(:dock).with(2).argument}
   it {is_expected.to respond_to(:bikes)}
+  it {is_expected.to respond_to(:broken_bikes)}
 
   describe '#initialize' do
     context "with parameters" do
@@ -39,6 +40,13 @@ describe DockingStation do # syntax for testing class instance - accepts class n
       DockingStation::DEFAULT_CAPACITY.times { subject.dock(bike) }
       expect { subject.dock(bike) }.to raise_error "Docking station full"
     end
+
+    context "when bike is broken" do
+      it "should add bike to broken bike array" do
+        expect { subject.dock(bike, false)}.to change{broken_bikes.count}.by(1)
+      end
+    end
+
   end
 
   describe '#release_bike' do
