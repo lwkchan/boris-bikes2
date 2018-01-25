@@ -4,6 +4,7 @@ require 'docking_station'
 # modules and their methods. The describe block is always used at the top to
 # put specs in a context. It can accept either a class name, in which case the
 # class needs to exist, or any string you'd like.
+
 bike = Bike.new
 
 describe DockingStation do # syntax for testing class instance - accepts class name

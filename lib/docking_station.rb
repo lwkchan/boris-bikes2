@@ -1,7 +1,7 @@
 class DockingStation
 
  def initialize
- @bikes = []
+   @bikes = []
  end
 
   attr_reader :bikes
@@ -22,9 +22,13 @@ class DockingStation
   end
 
   def dock(bike)
-
     @bikes.push(bike)
+  end
 
+  def dock_full?
+    if @bikes.count >= 20
+       'Docking station full' if @bikes.count >= 20
+    end
   end
 
 end
