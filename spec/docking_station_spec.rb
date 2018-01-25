@@ -4,24 +4,29 @@ require 'docking_station'
 # modules and their methods. The describe block is always used at the top to
 # put specs in a context. It can accept either a class name, in which case the
 # class needs to exist, or any string you'd like.
+bike = Bike.new
 
 describe DockingStation do # syntax for testing class instance - accepts class name
   it { is_expected.to respond_to :release_bike}
   it 'releases working bikes' do
-    bike = Bike.new
     subject.dock(bike)
     bike = subject.release_bike
-    expect(bike).to be_working 
-    # to check working returns false, use not_to eg. 
-    # expect(bike).not_to be_working 
+    expect(bike).to be_working
+    # to check working returns false, use not_to eg.
+    # expect(bike).not_to be_working
   end
 
   it {is_expected.to respond_to(:dock).with(1).argument}
-  it {is_expected.to respond_to(:bike)}
+  it {is_expected.to respond_to(:bikes)}
 
-  describe '#release_bike' do 
-    it 'releases a bike' do 
-      bike = Bike.new
+  describe '#dock' do
+    it 'can dock 20 bikes' do
+      20.times { subject.dock Bike.new }
+    end
+  end
+
+  describe '#release_bike' do
+    it 'releases a bike' do
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
