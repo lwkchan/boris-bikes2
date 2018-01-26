@@ -5,10 +5,12 @@ require 'docking_station'
 # put specs in a context. It can accept either a class name, in which case the
 # class needs to exist, or any string you'd like.
 
-bike = Bike.new
-
 describe DockingStation do # syntax for testing class instance - accepts class name
-  it { is_expected.to respond_to :release_bike}
+
+  let(:bike) {double('a working bike', broken?: nil)}
+  let(:broken_bike) {double('a broken bike', broken?: true)}
+
+  it {is_expected.to respond_to :release_bike}
   it {is_expected.to respond_to(:dock).with(1).argument}
   it {is_expected.to respond_to(:bikes)}
   it {is_expected.to respond_to(:broken_bikes)}
@@ -35,7 +37,6 @@ describe DockingStation do # syntax for testing class instance - accepts class n
   end
 
   describe '#dock' do
-
     it "raises an error when the docking station is full" do
       DockingStation::DEFAULT_CAPACITY.times { subject.dock(bike) }
       expect { subject.dock(bike) }.to raise_error "Docking station full"
@@ -51,8 +52,6 @@ describe DockingStation do # syntax for testing class instance - accepts class n
     end
 
     it 'only releases working bikes' do
-      broken_bike = Bike.new
-      broken_bike.report_broken
       subject.dock(broken_bike)
       expect{subject.release_bike}.to raise_error 'No working bikes available'
     end
