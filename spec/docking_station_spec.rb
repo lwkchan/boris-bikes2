@@ -58,7 +58,7 @@ describe DockingStation do # syntax for testing class instance - accepts class n
     end
 
     it 'raises an error when there are no bikes available' do
-      expect { subject.release_bike }.to raise_error 'No bikes available'
+      expect { subject.release_bike }.to raise_error 'No working bikes available'
     end
   end
 end

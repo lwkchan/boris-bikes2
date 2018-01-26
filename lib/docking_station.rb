@@ -11,8 +11,8 @@ class DockingStation
   attr_reader :bikes, :broken_bikes
 
   def release_bike
-    fail 'No bikes available' if empty? && @broken_bikes.empty?
-    fail 'No working bikes available' if empty? && !@broken_bikes.empty?
+    fail 'No working bikes available' if empty?# && @broken_bikes.empty?
+  #  fail 'No working bikes available' if empty? && !@broken_bikes.empty?
     @bikes.pop
   end
 
